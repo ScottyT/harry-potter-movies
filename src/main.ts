@@ -4,7 +4,7 @@ import { AppComponent } from './app/app.component';
 import { setupWorker } from 'msw/browser';
 import { http, HttpResponse } from 'msw';
 
-export const handlers = [
+const handlers = [
   http.get('/movies/:id', ({ params }) => {
     const options = {
       'e80d5a37-620e-4be2-92b9-fb1f5262494f': {

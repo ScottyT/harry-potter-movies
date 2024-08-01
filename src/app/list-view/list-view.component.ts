@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MoviesService } from '../movies.service';
+import { Movies } from '../movies';
 
 @Component({
   selector: 'app-list-view',
@@ -8,4 +9,7 @@ import { MoviesService } from '../movies.service';
   templateUrl: './list-view.component.html',
   styleUrl: './list-view.component.css',
 })
-export class ListViewComponent {}
+export class ListViewComponent {
+  @Input()
+  movieList: Movies[] = [];
+}

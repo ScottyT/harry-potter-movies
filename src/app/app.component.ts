@@ -1,11 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SearchComponent } from './search/search.component';
 import { ListViewComponent } from './list-view/list-view.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MoviesService } from './movies.service';
 import { http, HttpResponse, getResponse } from 'msw';
-import { handlers } from '../main';
+import { Movies } from './movies';
 
 @Component({
   selector: 'app-root',
@@ -16,14 +16,12 @@ import { handlers } from '../main';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  //moviesService = inject(MoviesService);
+  moviesService = inject(MoviesService);
   title = 'harry-potter-movies';
-  data = [];
+  protected data: Signal<Movies[]>;
 
   constructor() {
-    //this.moviesService.getAllMovies();
+    this.data = this.moviesService.getAllMovies();
   }
-  ngOnInit() {
-    console.log(handlers);
-  }
+  ngOnInit() {}
 }
