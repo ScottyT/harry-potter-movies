@@ -2,6 +2,9 @@
     <h2>{{movie().title}}</h2>
     <div class="movie-sub-details">
         <p>Release date: {{movie().release_date}}</p>
-        <p>Budget: {{ movie().budget}}</p>
+        <p>Budget: ${{ movie().budget}} million</p>
+        <p>Duration: {{ movie().duration | durationMinute }}</p>
     </div>
+    
 </div>
+<button>Details</button>
