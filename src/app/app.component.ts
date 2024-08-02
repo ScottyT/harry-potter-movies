@@ -18,9 +18,9 @@ import { Movies } from './movies';
 export class AppComponent {
   moviesService = inject(MoviesService);
   title = 'harry-potter-movies';
-  protected movies: Signal<Movies[]>;
+  // protected movies: Signal<Movies[]>;
 
   constructor() {
-    this.movies = this.moviesService.getAllMovies();
+    //this.moviesService.getAllMovies();
   }
 }

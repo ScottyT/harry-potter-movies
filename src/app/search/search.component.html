@@ -1,4 +1,9 @@
 <p>search works!</p>
 <div class="search-box">
-    
+    <input type="text" #searchQuery (change)="searchUpdated(searchQuery.value)" id="movie-search" />
+</div>
+<div class="list-grid">
+    @for (movie of movies$(); track $index) {
+       <app-list-view [movie]="movie"></app-list-view>
+    }
 </div>

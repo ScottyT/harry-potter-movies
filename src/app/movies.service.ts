@@ -9,10 +9,11 @@ import { map, tap } from 'rxjs';
 export class MoviesService {
   private items$ = signal<Movies[]>([]);
   constructor(private http: HttpClient) {}
-  getAllMovies(): Signal<Movies[]> {
+  getAllMovies() {
     this.http.get<Movies[]>('/movies').subscribe((movies) => {
       this.items$.set(movies);
     });
-    return this.items$.asReadonly();
+    //return this.items$.asReadonly();
   }
+  items = this.items$.asReadonly();
 }

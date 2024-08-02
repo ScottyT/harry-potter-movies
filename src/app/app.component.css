@@ -2,12 +2,3 @@
     max-width:900px;
     width:100%;
 }
-.list-grid {
-    display:flex;
-    flex-direction: column;
-    row-gap: 10px;
-}
-app-list-view {
-    display:flex;
-    justify-content:space-between;
-}
