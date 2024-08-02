@@ -5,7 +5,9 @@ import {
   inject,
   Input,
   input,
+  OnInit,
   Output,
+  Signal,
   signal,
 } from '@angular/core';
 import { Movies } from '../movies';
@@ -13,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ListViewComponent } from '../list-view/list-view.component';
 import { MoviesService } from '../movies.service';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -21,24 +24,21 @@ import { MoviesService } from '../movies.service';
   templateUrl: './search.component.html',
   styleUrl: './search.component.css',
 })
-export class SearchComponent {
-  searchQuery = signal<string>('');
-  // @Input()
-  // movies: Movies[] = [];
-  movies = input<Movies[]>([]);
-  filteredMovies = computed(() => {
-    const sq = this.searchQuery();
-    return this.movies$().filter((movie) => {
-      movie.title.includes(sq);
-    });
-  });
+export class SearchComponent implements OnInit {
+  searchQuery = new BehaviorSubject<string>('');
   moviesService = inject(MoviesService);
-  protected movies$ = this.moviesService.items;
+  //protected movies$ = this.moviesService.items;
+  movies$ = new Observable<Movies[]>();
 
   ngOnInit() {
-    this.moviesService.getAllMovies();
+    this.movies$ = combineLatest([
+      this.searchQuery,
+      this.moviesService.getAllMovies(),
+    ]).pipe(
+      map(([search, data]) => data.filter((x) => x.title.includes(search)))
+    );
   }
   searchUpdated(searchText: string) {
-    this.searchQuery.set(searchText);
+    this.searchQuery.next(searchText);
   }
 }

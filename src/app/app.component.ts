@@ -21,6 +21,6 @@ export class AppComponent {
   // protected movies: Signal<Movies[]>;
 
   constructor() {
-    //this.moviesService.getAllMovies();
+    // this.moviesService.getAllMovies();
   }
 }
