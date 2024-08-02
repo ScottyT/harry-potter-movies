@@ -18,10 +18,9 @@ import { Movies } from './movies';
 export class AppComponent {
   moviesService = inject(MoviesService);
   title = 'harry-potter-movies';
-  protected data: Signal<Movies[]>;
+  protected movies: Signal<Movies[]>;
 
   constructor() {
-    this.data = this.moviesService.getAllMovies();
+    this.movies = this.moviesService.getAllMovies();
   }
-  ngOnInit() {}
 }

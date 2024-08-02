@@ -1,6 +1,7 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, input, Input } from '@angular/core';
 import { MoviesService } from '../movies.service';
 import { Movies } from '../movies';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-list-view',
@@ -10,6 +11,5 @@ import { Movies } from '../movies';
   styleUrl: './list-view.component.css',
 })
 export class ListViewComponent {
-  @Input()
-  movieList: Movies[] = [];
+  movie = input.required<Movies>();
 }

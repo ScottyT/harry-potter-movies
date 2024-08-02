@@ -1,7 +1,6 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { Movies } from './movies';
 import { HttpClient } from '@angular/common/http';
-import { http } from 'msw';
 
 @Injectable({
   providedIn: 'root',

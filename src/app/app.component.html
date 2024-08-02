@@ -1,2 +1,8 @@
-<app-search></app-search>
-<app-list-view [movieList]="data()"></app-list-view>
+<div class="container list">
+    <app-search></app-search>
+    <div class="list-grid">
+        @for (movie of movies(); track $index) {
+           <app-list-view [movie]="movie"></app-list-view>
+        }
+    </div>
+</div>
