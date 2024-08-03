@@ -1,6 +1,5 @@
 import { Component, inject, input, Input } from '@angular/core';
-import { MoviesService } from '../movies.service';
-import { Movies } from '../movies';
+import { Movies } from '../movies.interface';
 import { CommonModule } from '@angular/common';
 import { DurationMinutePipe } from '../pipes/duration-minute.pipe';
 import { RouterModule } from '@angular/router';

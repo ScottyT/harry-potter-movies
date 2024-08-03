@@ -1,10 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Movies } from '../movies';
+import { Component, inject, OnInit, signal, Signal } from '@angular/core';
+import { Movies } from '../movies.interface';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ListViewComponent } from '../list-view/list-view.component';
-import { MoviesService } from '../movies.service';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { MoviesService } from '../services/movies.service';
+import { Observable } from 'rxjs';
+import { MovieDetails } from '../movie-details.interface';
 
 @Component({
   selector: 'app-search',

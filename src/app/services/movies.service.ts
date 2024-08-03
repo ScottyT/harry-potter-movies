@@ -1,14 +1,7 @@
 import { Injectable, Signal, signal } from '@angular/core';
-import { Movies } from './movies';
+import { Movies } from '../movies.interface';
 import { HttpClient } from '@angular/common/http';
-import {
-  BehaviorSubject,
-  combineLatest,
-  map,
-  Observable,
-  Subject,
-  tap,
-} from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
