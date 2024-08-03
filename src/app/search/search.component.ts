@@ -1,15 +1,4 @@
-import {
-  Component,
-  computed,
-  EventEmitter,
-  inject,
-  Input,
-  input,
-  OnInit,
-  Output,
-  Signal,
-  signal,
-} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Movies } from '../movies';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -25,20 +14,16 @@ import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
   styleUrl: './search.component.css',
 })
 export class SearchComponent implements OnInit {
-  searchQuery = new BehaviorSubject<string>('');
   moviesService = inject(MoviesService);
-  //protected movies$ = this.moviesService.items;
-  movies$ = new Observable<Movies[]>();
+  movies$: Observable<Movies[]> = new Observable<Movies[]>();
 
   ngOnInit() {
-    this.movies$ = combineLatest([
-      this.searchQuery,
-      this.moviesService.getAllMovies(),
-    ]).pipe(
-      map(([search, data]) => data.filter((x) => x.title.includes(search)))
-    );
+    this.movies$ = this.moviesService.allMovies$;
   }
-  searchUpdated(searchText: string) {
-    this.searchQuery.next(searchText);
+  titleSearchUpdated(searchText: string) {
+    this.moviesService.titleSearchQuery.next(searchText);
+  }
+  releaseSearchUpdate(searchText: string) {
+    this.moviesService.releaseSearchQuery.next(searchText);
   }
 }

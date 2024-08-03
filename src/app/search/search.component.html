@@ -1,6 +1,6 @@
-<p>search works!</p>
 <div class="search-box">
-    <input type="text" #searchQuery (input)="searchUpdated(searchQuery.value)" id="movie-search" />
+    Title:<input type="text" #titleSearchQuery (input)="titleSearchUpdated(titleSearchQuery.value)" id="movie-search" />
+    Release year: <input type="number" #releaseSearchQuery (input)="releaseSearchUpdate(releaseSearchQuery.value)" />
 </div>
 <div class="list-grid">
     @for (movie of movies$ | async; track $index) {

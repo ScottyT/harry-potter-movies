@@ -1,20 +1,42 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { Movies } from './movies';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, Subject, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  map,
+  Observable,
+  Subject,
+  tap,
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MoviesService {
   constructor(private http: HttpClient) {}
-  private items$: BehaviorSubject<Movies[]> = new BehaviorSubject<Movies[]>([]);
-  items = this.items$.asObservable();
+
+  titleSearchQuery: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  releaseSearchQuery: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  allMovies$: Observable<Movies[]> = this.getFilteredMovies();
+
   getAllMovies() {
-    return this.http.get<Movies[]>('/movies').pipe(
-      tap((data) => {
-        this.items$.next(data);
-      })
+    return this.http.get<Movies[]>('/movies');
+  }
+
+  private getFilteredMovies() {
+    return combineLatest([
+      this.titleSearchQuery,
+      this.releaseSearchQuery,
+      this.getAllMovies(),
+    ]).pipe(
+      map(([titleSearch, releaseSearch, data]) =>
+        data.filter(
+          (x) =>
+            x.title.includes(titleSearch) &&
+            x.release_date.substring(0, 4).includes(releaseSearch)
+        )
+      )
     );
   }
 }
