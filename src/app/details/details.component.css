@@ -1,0 +1,11 @@
+h2 {
+    text-align:center;
+}
+.details-list-heading {
+    text-align:right;
+    font-weight:bold;
+    border-right:1px white solid;
+}
+.details-list-content {
+    text-align: left;
+}

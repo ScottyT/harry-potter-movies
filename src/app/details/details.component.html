@@ -1,4 +1,41 @@
-<p>details works!</p>
+<button class="ms-btn" (click)="goBack()"><i class="fas fa-house"></i> Back</button>
 <div>
-    {{ movie().title }}
+    <h1>{{ movie().title }}</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <img [src]="movie().poster" />
+        </div>
+        <div class="col-md-8"><p>{{ movie().summary }}</p></div>
+    </div>
+</div>
+<div>
+    <h2>Details</h2>
+    <div class="details-list">
+        <hr/>
+        <div class="row">
+            <div class="col-md-4 details-list-heading"><p>Box Office</p></div>
+            <div class="col-md-8 details-list-content"><p>{{ movie().box_office | cost:'million' }}</p></div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-4 details-list-heading"><p>Budget</p></div>
+            <div class="col-md-8 details-list-content"><p>{{ movie().budget | cost:'million' }}</p></div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-4 details-list-heading"><p>Duration</p></div>
+            <div class="col-md-8 details-list-content"><p>{{ movie().duration }}</p></div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-4 details-list-heading"><p>Producers</p></div>
+            <div class="col-md-8 details-list-content"><p>{{ movie().producers.join(', ') }}</p></div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-4 details-list-heading"><p>Cinematographers</p></div>
+            <div class="col-md-8 details-list-content"><p>{{ movie().cinematographers.join(', ') }}</p></div>
+        </div>
+        <hr/>
+    </div>
 </div>

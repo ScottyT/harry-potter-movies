@@ -6,3 +6,7 @@ button {
     position:relative;
     height:50px;
 }
+
+a[role=button] {
+    height:28px;
+}

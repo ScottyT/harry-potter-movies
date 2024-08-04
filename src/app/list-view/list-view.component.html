@@ -1,8 +1,8 @@
 <div class="list-view">
     <h2>{{movie().title}}</h2>
     <div class="movie-sub-details">
-        <p>Release date: {{movie().release_date}}</p>
-        <p>Budget: ${{ movie().budget}} million</p>
+        <p>Release date: {{ movie().release_date }}</p>
+        <p>Budget: {{ movie().budget | cost:'million' }}</p>
         <p>Duration: {{ movie().duration | durationMinute }}</p>
     </div>
     
