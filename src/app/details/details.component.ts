@@ -13,9 +13,7 @@ import { CostPipe } from '../pipes/cost.pipe';
 })
 export class DetailsComponent {
   movie = input.required<MovieDetails>();
-  constructor(private location: Location) {}
-
   goBack() {
-    this.location.back();
+    history.back();
   }
 }
