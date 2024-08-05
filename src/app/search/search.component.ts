@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ListViewComponent } from '../list-view/list-view.component';
 import { MoviesService } from '../services/movies.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { MovieDetails } from '../movie-details.interface';
 
 @Component({
@@ -16,15 +16,29 @@ import { MovieDetails } from '../movie-details.interface';
 })
 export class SearchComponent implements OnInit {
   moviesService = inject(MoviesService);
+  titleSearchQuery: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  releaseSearchQuery: BehaviorSubject<string> = new BehaviorSubject<string>('');
   movies$: Observable<Movies[]> = new Observable<Movies[]>();
 
   ngOnInit() {
-    this.movies$ = this.moviesService.allMovies$;
+    this.movies$ = combineLatest([
+      this.titleSearchQuery,
+      this.releaseSearchQuery,
+      this.moviesService.getAllMovies(),
+    ]).pipe(
+      map(([titleSearch, releaseSearch, data]) =>
+        data.filter(
+          (x) =>
+            x.title.toLowerCase().includes(titleSearch) &&
+            x.release_date.substring(0, 4).includes(releaseSearch)
+        )
+      )
+    );
   }
   titleSearchUpdated(searchText: string) {
-    this.moviesService.titleSearchQuery.next(searchText);
+    this.titleSearchQuery.next(searchText);
   }
   releaseSearchUpdate(searchText: string) {
-    this.moviesService.releaseSearchQuery.next(searchText);
+    this.releaseSearchQuery.next(searchText);
   }
 }

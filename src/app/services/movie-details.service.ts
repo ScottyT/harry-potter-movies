@@ -10,8 +10,6 @@ export class MovieDetailsService {
   constructor(private readonly http: HttpClient) {}
 
   getMovieDetails(id: string) {
-    return this.http
-      .get<MovieDetails>(`/movies/${id}`)
-      .pipe(tap((data) => console.log(data)));
+    return this.http.get<MovieDetails>(`/movies/${id}`);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, inject, Input, input, signal, Signal } from '@angular/core';
 import { MovieDetails } from '../movie-details.interface';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { CostPipe } from '../pipes/cost.pipe';
 
 @Component({
@@ -13,8 +13,9 @@ import { CostPipe } from '../pipes/cost.pipe';
 })
 export class DetailsComponent {
   movie = input.required<MovieDetails>();
+  constructor(private location: Location) {}
 
   goBack() {
-    history.back();
+    this.location.back();
   }
 }
