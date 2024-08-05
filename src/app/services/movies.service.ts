@@ -26,7 +26,7 @@ export class MoviesService {
       map(([titleSearch, releaseSearch, data]) =>
         data.filter(
           (x) =>
-            x.title.includes(titleSearch) &&
+            x.title.toLowerCase().includes(titleSearch) &&
             x.release_date.substring(0, 4).includes(releaseSearch)
         )
       )

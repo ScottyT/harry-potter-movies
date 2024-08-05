@@ -9,3 +9,6 @@ h2 {
 .details-list-content {
     text-align: left;
 }
+.heading {
+    font-weight: bold;
+}
